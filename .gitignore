@@ -1,0 +1,13 @@
+*.iml
+.idea
+target
+derby.log
+metastore_db
+.idea
+target
+derby.log
+metastore_db
+.idea
+target
+web/WEB-INF/lib/
+*/target
