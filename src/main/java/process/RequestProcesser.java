@@ -30,7 +30,7 @@ public class RequestProcesser {
     }
 
     public void start(){
-        scheduledExecutorService.scheduleWithFixedDelay(()->crawlHbasePPS(),0,5, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleWithFixedDelay(()->crawlHbasePPS(),0,1, TimeUnit.MINUTES);
     }
 
     private void crawlHbasePPS() {
