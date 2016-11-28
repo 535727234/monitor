@@ -31,18 +31,18 @@ public class HttpClientTool {
                     String body = EntityUtils.toString(entity);
                     return body;
                 } else {
-                    LoggerUtils.warn("get uri entity is empty, uri:" + httpget.getURI() + response.getStatusLine());
+                    LoggerUtils.runtimelogger.warn("get uri entity is empty, uri:" + httpget.getURI() + response.getStatusLine());
                 }
             } finally {
                 response.close();
             }
         } catch ( ParseException | IOException e) {
-            LoggerUtils.error("get url error" + httpget.getURI(), e);
+            LoggerUtils.runtimelogger.error("get url error" + httpget.getURI(), e);
         } finally {
             try {
                 httpclient.close();
             } catch (IOException e) {
-                LoggerUtils.error("close connection error", e);
+                LoggerUtils.runtimelogger.error("close connection error", e);
             }
         }
         return null;
@@ -77,12 +77,12 @@ public class HttpClientTool {
                 response.close();
             }
         } catch (IOException e) {
-            LoggerUtils.error("http put error",e);
+            LoggerUtils.runtimelogger.error("http put error",e);
         }finally {
             try {
                 httpclient.close();
             } catch (IOException e) {
-                LoggerUtils.error("http client close error",e);
+                LoggerUtils.runtimelogger.error("http client close error",e);
             }
         }
         return "";

@@ -1,5 +1,9 @@
 package process;
 
+import process.house.HouseMonitor;
+import process.stock.StockMonitor;
+import tool.LoggerUtils;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -10,8 +14,9 @@ public class Main implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        new RequestProcesser().start();
-        System.out.println("system started");
+        new HouseMonitor().start();
+        new StockMonitor().start();
+        LoggerUtils.runtimelogger.info("system started");
     }
 
     @Override
