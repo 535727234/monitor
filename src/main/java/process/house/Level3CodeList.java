@@ -22,7 +22,9 @@ public class Level3CodeList {
     }
 
     public static List<String> getCodeList(){
-        return Level2CodeList.getLevel2CodeList().stream().flatMap(url-> Level3CodeList.process(url).stream()).collect(Collectors.toList());
+        return Level2CodeList.getLevel2CodeList().stream()
+                .flatMap(url->Level3CodeList.process(url).stream())
+                .collect(Collectors.toList());
     }
 
     private static List<String> process(String code) {
@@ -33,13 +35,16 @@ public class Level3CodeList {
 
             Object[] divArray = root.evaluateXPath("//div[@class='page-box house-lst-page-box']//a");
 
+
             int pageSize=1;
             if(divArray.length>2) {
                 TagNode node = ((TagNode) divArray[divArray.length - 2]);
                 pageSize = Integer.valueOf(node.getText().toString().trim());
             }
             for(int i=1;i<=pageSize;i++){
-                result.add(code+"d"+i);
+                String tiny_url = code+"d"+i;
+                result.add(tiny_url);
+                LoggerUtils.runtimelogger.info(tiny_url);
             }
             LoggerUtils.runtimelogger.info("all size:{}",result.size());
         } catch (Throwable e) {

@@ -43,10 +43,11 @@ public class Consumer implements Runnable{
         String url = getUrl(code);
         System.out.println(url);
         TagNode root = cleaner.clean(new URL(url));
-        for(Object one:root.evaluateXPath("//ul[@class='house-lst']//li"))parseOneHouse((TagNode) one);
+        String level2 = code.split("/")[2];
+        for(Object one:root.evaluateXPath("//ul[@class='house-lst']//li"))parseOneHouse((TagNode) one,level2);
     }
 
-    private void parseOneHouse(TagNode node) throws XPatherException {
+    private void parseOneHouse(TagNode node,String level2Data) throws XPatherException {
         TagNode root = (TagNode)node.evaluateXPath("div[@class='info-panel']")[0];
         //1title
         String title = nodeOne(root,"/h2//a[@name='selectDetail']");
@@ -59,7 +60,7 @@ public class Consumer implements Runnable{
         //5一级区域
         String level1 = nodeOne((TagNode)root.evaluateXPath("//div[@class='col-1']")[0],"//div[@class='other']//a",0,0);
         //6二级区域
-//        String level2 = nodeOne((TagNode)root.evaluateXPath("//div[@class='col-1']")[0],"//div[@class='other']//a",1,0);
+        String level2 = level2Data;
         //7楼层
         String high = nodeOne((TagNode)root.evaluateXPath("//div[@class='col-1']")[0],"//div[@class='other']//div",0,4);
         //8朝向
@@ -78,8 +79,8 @@ public class Consumer implements Runnable{
         String id = ((TagNode)root.evaluateXPath("/h2//a[@name='selectDetail']")[0]).getAttributeByName("href").substring(12).replace(".html","");
 
 
-        LoggerUtils.monitorlogger1.info("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
-                title,xiaoqu,type,size,level1,high,face,buildTime,price,price2,lookSize,id);
+        LoggerUtils.monitorlogger1.info("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
+                title,xiaoqu,type,size,level1,level2,high,face,buildTime,price,price2,lookSize,id);
     }
 
     //获取所有投资的股票

@@ -6,4 +6,5 @@ package process.house;
 public class Constant {
     public static String baseUrl = "http://sh.lianjia.com";
     public static String url = "http://sh.lianjia.com/ershoufang";
+    public static String currentLevel2="";
 }
